@@ -1,0 +1,94 @@
+$lovest-color: #99ccff;
+$low-color: #3399ff;
+$high-color: #ff6600;
+$higest-color: #ff3333;
+
+.second-body{
+    background-color: #000;
+    .todo-container{
+        padding: 4rem;
+        width: 1600px;
+        height: 100vh;
+        margin: auto;
+        background-color: #000;
+        color: #fff;
+        .todo-inputs{
+            display: flex;
+            gap: 10px;
+            margin: 2rem 0rem;
+            input{
+                width: 20%;
+                height: 3rem;
+                border: 1px solid #000;
+                border-radius: 5px;
+                padding: 0 1rem;
+            }
+            select{
+                border-radius: 5px;
+            }
+
+            button{
+                width: 10%;
+                height: 3rem;
+                border: 1px solid #000;
+                border-radius: 5px;
+                background-color: #fff;
+                color: #000;
+                cursor: pointer;
+            }
+        }
+        .todo-containers{
+            display: flex;
+            gap: 20px;
+            div{
+                border-radius: 10px;
+                background-color: #818181;
+                color: #fff;
+                padding: 10px;
+                width: 100%;
+                height: fit-content;
+                // take first child
+            }
+
+            div:last-child{
+                ul{
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px;
+                    padding: 0;
+                    list-style: none;
+                    li {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        background-color: $low-color;
+                        padding: 10px 20px;
+                        height:  100px;
+                        border-radius: 10px;
+                        font-size: 14px;
+                        transition: 0.8s;
+                        width: 100%;
+                        &:hover{
+                            cursor: pointer;
+                            opacity: 0.8;
+                            margin-top: -1rem;
+                        }
+                        p{
+                            margin: 0;
+                        }
+                        button{
+                            width: fit-content;
+                            border: none;
+                            padding: 5px;
+                            font-size: 13px;
+                            &:hover{
+                                cursor: pointer;
+                                opacity: 0.8;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

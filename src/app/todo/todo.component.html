@@ -1,0 +1,80 @@
+<div class="second-body">
+  <div class="todo-container">
+    <!-- Header -->
+    <div class="todo-header">
+      <h1>Roadmap</h1>
+      <h6>Powered by Ferhat Mete</h6>
+    </div>
+    <!-- Inputs -->
+    <div class="todo-inputs">
+      <input [(ngModel)]="taskName" placeholder="Task Name" />
+      <input [(ngModel)]="author" placeholder="Author" />
+      <select id="status" [(ngModel)]="priority">
+        <option value="higest">Higest</option>
+        <option value="high">High</option>
+        <option value="low">Low</option>
+        <option value="lovest">Lovest</option>
+      </select>
+      <button (click)="addTask()">Add Task</button>
+
+    </div>
+    <!-- Todo Containers -->
+    <div class="todo-containers">
+      <div class="todo-tasks">
+        <div>
+          <h3>Todo</h3>
+        </div>
+        <div>
+          <ul>
+            <li class="todo-bg" *ngFor="let task of tasks" draggable="true">
+              <p><strong>{{ task.name }}</strong></p> 
+              <p>{{ task.author }}</p>
+              <button (click)="moveToOngoing(task)">Completed</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="ongoing-tasks">
+        <div>
+          <h3>Ongoning</h3>
+        </div>
+        <div>
+          <ul>
+            <li class="ongoing-bg" *ngFor="let task of ongoingTasks" draggable="true">
+              <p><strong>{{ task.name }}</strong></p> 
+              <p>{{ task.author }}</p>
+              <button (click)="moveToTesting(task)">Completed</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="testing-tasks">
+        <div>
+          <h3>Testing</h3>
+        </div>
+        <div>
+          <ul>
+            <li class="testing-bg" *ngFor="let task of testingTasks" draggable="true">
+              <p><strong>{{ task.name }}</strong></p> 
+              <p>{{ task.author }}</p>
+              <button (click)="moveToDone(task)">Completed</button>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="done-tasks">
+        <div>
+          <h3>Done</h3>
+        </div>
+        <div>
+          <ul>
+            <li class="done-bg" *ngFor="let task of doneTasks" draggable="true">
+              <p><strong>{{ task.name }}</strong></p> 
+              <p>{{ task.author }}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
