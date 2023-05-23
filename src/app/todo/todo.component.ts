@@ -35,12 +35,8 @@ export class TodoListComponent implements OnInit {
     this.saveTasks();
     this.taskName = '';
     this.author = '';
-    this.status = '';
+    this.status = "";
     this.priority = '';
-  }
-
-  getSelectedPriority() {
-    return this.priority;
   }
 
   saveTasks() {
@@ -78,6 +74,7 @@ export class TodoListComponent implements OnInit {
       this.tasks.splice(index, 1);
       this.ongoingTasks.push(task);
       this.status = 'ongoing';
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
       this.saveTasks();
     }
   }
@@ -88,6 +85,7 @@ export class TodoListComponent implements OnInit {
       this.ongoingTasks.splice(index, 1);
       this.testingTasks.push(task);
       this.status = 'testing';
+      localStorage.setItem('ongoingTasks', JSON.stringify(this.ongoingTasks));
       this.saveTasks();
     }
   }
@@ -98,6 +96,7 @@ export class TodoListComponent implements OnInit {
       this.testingTasks.splice(index, 1);
       this.doneTasks.push(task);
       this.status = 'done';
+      localStorage.setItem('testingTasks', JSON.stringify(this.testingTasks));
       this.saveTasks();
     }
   }
