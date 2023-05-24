@@ -8,42 +8,48 @@
     <!-- Inputs -->
     <form (ngSubmit)="addTask()">
       <div class="todo-inputs">
-        <div>
-          <label for="taskName">Task Name</label>
-          <input
-            [(ngModel)]="taskName"
-            name="taskName"
-            id="taskName"
-            placeholder="Enter Task Name"
-            required
-          />
+        <div class="todo-inputs-first">
+          <div>
+            <label for="taskName">Task Name</label>
+            <input
+              [(ngModel)]="taskName"
+              name="taskName"
+              id="taskName"
+              placeholder="Enter Task Name"
+              required
+            />
+          </div>
+          <div>
+            <label for="author">Author</label>
+            <select
+              [(ngModel)]="author"
+              name="author"
+              id="author"
+              aria-placeholder="Author"
+              required
+            >
+              <option value="Ferhat Mete">Ferhat Mete</option>
+              <option value="Tolga Işık">Tolga Işık</option>
+              <option value="Umut Bektaş">Umut Bektaş</option>
+            </select>
+          </div>
+          <div>
+            <label for="priority">Priority</label>
+            <select
+              [(ngModel)]="priority"
+              name="priority"
+              id="priority"
+              aria-placeholder="Priority"
+              required
+            >
+              <option value="highest">Highest</option>
+              <option value="high">High</option>
+              <option value="low">Low</option>
+              <option value="lowest">Lowest</option>
+            </select>
+          </div>
+          <button type="submit">Add Task</button>
         </div>
-        <div>
-          <label for="author">Author</label>
-          <input
-            [(ngModel)]="author"
-            name="author"
-            id="author"
-            placeholder="Enter Author Name"
-            required
-          />
-        </div>
-        <div>
-          <label for="priority">Priority</label>
-          <select
-            [(ngModel)]="priority"
-            name="priority"
-            id="priority"
-            aria-placeholder="Priority"
-            required
-          >
-            <option value="highest">Highest</option>
-            <option value="high">High</option>
-            <option value="low">Low</option>
-            <option value="lowest">Lowest</option>
-          </select>
-        </div>
-        <button type="submit">Add Task</button>
       </div>
     </form>
 
@@ -55,12 +61,15 @@
         </div>
         <div>
           <ul>
-            <li *ngFor="let task of tasks" [ngClass]="taskStatus(task)" (click)="openModal(task)">
-              <p>
+            <li
+              *ngFor="let task of tasks"
+              [ngClass]="taskStatus(task)"
+              (click)="openModal(task)"
+            >
+              <p class="task-name">
                 <strong>{{ task.name }}</strong>
               </p>
-              <p>Task: {{ task.id }}</p>
-              <p>{{ task.author }}</p>
+              <p class="task-author">{{ task.author }}</p>
               <div class="button-area">
                 <button (click)="moveToOngoing(task)">Completed</button>
                 <button (click)="deleteTask(task)">Delete</button>
@@ -75,7 +84,11 @@
         </div>
         <div>
           <ul>
-            <li *ngFor="let task of ongoingTasks" [ngClass]="taskStatus(task)" (click)="openModal(task)">
+            <li
+              *ngFor="let task of ongoingTasks"
+              [ngClass]="taskStatus(task)"
+              (click)="openModal(task)"
+            >
               <p>
                 <strong>{{ task.name }}</strong>
               </p>
@@ -95,7 +108,11 @@
         </div>
         <div>
           <ul>
-            <li *ngFor="let task of testingTasks" [ngClass]="taskStatus(task)" (click)="openModal(task)">
+            <li
+              *ngFor="let task of testingTasks"
+              [ngClass]="taskStatus(task)"
+              (click)="openModal(task)"
+            >
               <p>
                 <strong>{{ task.name }}</strong>
               </p>
@@ -115,7 +132,11 @@
         </div>
         <div>
           <ul>
-            <li *ngFor="let task of doneTasks" [ngClass]="taskStatus(task)" (click)="openModal(task)">
+            <li
+              *ngFor="let task of doneTasks"
+              [ngClass]="taskStatus(task)"
+              (click)="openModal(task)"
+            >
               <p>
                 <strong>{{ task.name }}</strong>
               </p>
@@ -130,13 +151,15 @@
       </div>
     </div>
     <!-- Todo Modal -->
-    <div class="modal" [ngClass]="{'show': showModal}">
+    <div class="modal" [ngClass]="{ show: showModal }">
       <div *ngIf="selectedTask" class="modal-content">
         <div class="modal-close">
-          <button (click)="closeModal()">Close</button>
+          <button (click)="closeModal()">
+            <img src="assets/icons/close.svg" alt="Close" />
+          </button>
         </div>
         <h2>{{ selectedTask.name }}</h2>
-        <p>Task ID: {{ selectedTask.id }}</p>
+        <p>Task: {{ selectedTask.id }}</p>
         <p>Author: {{ selectedTask.author }}</p>
         <p>Status: {{ selectedTask.status }}</p>
       </div>
