@@ -1,94 +1,193 @@
-$lovest-color: #99ccff;
-$low-color: #3399ff;
+$lovest-color: #70b7fd;
+$low-color: #0068cf;
 $high-color: #ff6600;
-$higest-color: #ff3333;
+$higest-color: #fd3a3a;
+$list-bg-color: #525252;
+$black: #000;
+$white: #fff;
+$gray: #3f3f3f;
+$scrollStopFirst: #afafaf;
+$scrollStopSecond: #bebebe;
+$scrollStopThird: #cdcdcd;
 
-.second-body{
-    background-color: #000;
-    .todo-container{
-        padding: 4rem;
-        width: 1600px;
-        height: 100vh;
-        margin: auto;
-        background-color: #000;
-        color: #fff;
-        .todo-inputs{
-            display: flex;
-            gap: 10px;
-            margin: 2rem 0rem;
-            input{
-                width: 20%;
-                height: 3rem;
-                border: 1px solid #000;
-                border-radius: 5px;
-                padding: 0 1rem;
-            }
-            select{
-                border-radius: 5px;
-            }
-
-            button{
-                width: 10%;
-                height: 3rem;
-                border: 1px solid #000;
-                border-radius: 5px;
-                background-color: #fff;
-                color: #000;
-                cursor: pointer;
-            }
+.second-body {
+  background-color: $black;
+  .todo-container {
+    padding: 4rem;
+    width: 1600px;
+    height: 100vh;
+    margin: auto;
+    background-color: $black;
+    color: $white;
+    form {
+      .todo-inputs {
+        display: flex;
+        gap: 10px;
+        margin: 2rem 0rem;
+        align-items: flex-end;
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          input {
+            width: 100%;
+            height: 3rem;
+            border: 1px solid $black;
+            border-radius: 5px;
+            padding: 0 1rem;
+          }
+          select {
+            border-radius: 5px;
+            height: 48px;
+          }
         }
-        .todo-containers{
-            display: flex;
-            gap: 20px;
-            div{
-                border-radius: 10px;
-                background-color: #818181;
-                color: #fff;
-                padding: 10px;
-                width: 100%;
-                height: fit-content;
-                // take first child
-            }
-
-            div:last-child{
-                ul{
-                    display: flex;
-                    flex-direction: column;
-                    gap: 20px;
-                    padding: 0;
-                    list-style: none;
-                    li {
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: space-between;
-                        background-color: $low-color;
-                        padding: 10px 20px;
-                        height:  100px;
-                        border-radius: 10px;
-                        font-size: 14px;
-                        transition: 0.8s;
-                        width: 100%;
-                        &:hover{
-                            cursor: pointer;
-                            opacity: 0.8;
-                            margin-top: -1rem;
-                        }
-                        p{
-                            margin: 0;
-                        }
-                        button{
-                            width: fit-content;
-                            border: none;
-                            padding: 5px;
-                            font-size: 13px;
-                            &:hover{
-                                cursor: pointer;
-                                opacity: 0.8;
-                            }
-                        }
-                    }
-                }
-            }
+        button {
+          width: 10%;
+          height: 3rem;
+          border: 1px solid $black;
+          border-radius: 5px;
+          background-color: $white;
+          color: $black;
+          cursor: pointer;
         }
+      }
     }
+    .todo-containers {
+      display: flex;
+      gap: 20px;
+      height: 60vh;
+      .task-list-container {
+        border-radius: 10px;
+        background-color: $gray;
+        color: $white;
+        padding: 10px;
+        width: 100%;
+        overflow-y: auto;
+      }
+      .task-list-container-scroll::-webkit-scrollbar {
+        width: 10px;
+        background-color: transparent;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+
+      .task-list-container-scroll::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+        background-color: transparent;
+        border-top-right-radius: 10px;
+        border-bottom-right-radius: 10px;
+      }
+      .task-list-container-scroll::-webkit-scrollbar-thumb {
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        background-image: -webkit-gradient(
+          linear,
+          left bottom,
+          left top,
+          color-stop(0.44, $scrollStopFirst),
+          color-stop(0.72, $scrollStopSecond),
+          color-stop(0.86, $scrollStopThird)
+        );
+      }
+      div {
+        h3 {
+          padding: 10px;
+        }
+      }
+      div:last-child {
+        ul {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          padding: 0;
+          list-style: none;
+          li {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            // background-color: $low-color;
+            padding: 10px 20px;
+            height: 150px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: 0.2s;
+            width: 100%;
+            p {
+              margin: 0;
+            }
+            .button-area {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              button {
+                width: fit-content;
+                border: none;
+                padding: 5px;
+                font-size: 13px;
+                &:hover {
+                  cursor: pointer;
+                  opacity: 0.9;
+                }
+              }
+            }
+            &:hover {
+              cursor: pointer;
+              opacity: 0.9;
+            }
+          }
+          .task-highest {
+            background-color: $higest-color;
+          }
+          .task-high {
+            background-color: $high-color;
+          }
+          .task-low {
+            background-color: $low-color;
+          }
+          .task-lowest {
+            background-color: $lovest-color;
+          }
+        }
+      }
+    }
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-content {
+      width: 50%;
+      height: 50%;
+      background-color: $white;
+      padding: 20px;
+      border-radius: 5px;
+      color: #000;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transform: translateY(-20px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      .modal-close{
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+    .modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal.show .modal-content {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }

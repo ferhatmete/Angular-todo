@@ -6,74 +6,139 @@
       <h6>Powered by Ferhat Mete</h6>
     </div>
     <!-- Inputs -->
-    <div class="todo-inputs">
-      <input [(ngModel)]="taskName" placeholder="Task Name" />
-      <input [(ngModel)]="author" placeholder="Author" />
-      <select id="status" [(ngModel)]="priority">
-        <option value="higest">Higest</option>
-        <option value="high">High</option>
-        <option value="low">Low</option>
-        <option value="lovest">Lovest</option>
-      </select>
-      <button (click)="addTask()">Add Task</button>
+    <form (ngSubmit)="addTask()">
+      <div class="todo-inputs">
+        <div>
+          <label for="taskName">Task Name</label>
+          <input
+            [(ngModel)]="taskName"
+            name="taskName"
+            id="taskName"
+            placeholder="Enter Task Name"
+            required
+          />
+        </div>
+        <div>
+          <label for="author">Author</label>
+          <input
+            [(ngModel)]="author"
+            name="author"
+            id="author"
+            placeholder="Enter Author Name"
+            required
+          />
+        </div>
+        <div>
+          <label for="priority">Priority</label>
+          <select
+            [(ngModel)]="priority"
+            name="priority"
+            id="priority"
+            aria-placeholder="Priority"
+            required
+          >
+            <option value="highest">Highest</option>
+            <option value="high">High</option>
+            <option value="low">Low</option>
+            <option value="lowest">Lowest</option>
+          </select>
+        </div>
+        <button type="submit">Add Task</button>
+      </div>
+    </form>
 
-    </div>
     <!-- Todo Containers -->
     <div class="todo-containers">
-      <div class="todo-tasks">
-        <div>
+      <div class="todo-tasks task-list-container task-list-container-scroll">
+        <div class="header">
           <h3>Todo</h3>
         </div>
         <div>
           <ul>
-            <li class="todo-bg" *ngFor="let task of tasks" draggable="true">
-              <p><strong>{{ task.name }}</strong></p> 
+            <li *ngFor="let task of tasks" [ngClass]="taskStatus(task)" (click)="openModal(task)">
+              <p>
+                <strong>{{ task.name }}</strong>
+              </p>
+              <p>Task: {{ task.id }}</p>
               <p>{{ task.author }}</p>
-              <button (click)="moveToOngoing(task)">Completed</button>
+              <div class="button-area">
+                <button (click)="moveToOngoing(task)">Completed</button>
+                <button (click)="deleteTask(task)">Delete</button>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="ongoing-tasks">
-        <div>
+      <div class="ongoing-tasks task-list-container task-list-container-scroll">
+        <div class="header">
           <h3>Ongoning</h3>
         </div>
         <div>
           <ul>
-            <li class="ongoing-bg" *ngFor="let task of ongoingTasks" draggable="true">
-              <p><strong>{{ task.name }}</strong></p> 
+            <li *ngFor="let task of ongoingTasks" [ngClass]="taskStatus(task)" (click)="openModal(task)">
+              <p>
+                <strong>{{ task.name }}</strong>
+              </p>
+              <p>Task: {{ task.id }}</p>
               <p>{{ task.author }}</p>
-              <button (click)="moveToTesting(task)">Completed</button>
+              <div class="button-area">
+                <button (click)="moveToTesting(task)">Completed</button>
+                <button (click)="deleteTask(task)">Delete</button>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="testing-tasks">
-        <div>
+      <div class="testing-tasks task-list-container task-list-container-scroll">
+        <div class="header">
           <h3>Testing</h3>
         </div>
         <div>
           <ul>
-            <li class="testing-bg" *ngFor="let task of testingTasks" draggable="true">
-              <p><strong>{{ task.name }}</strong></p> 
+            <li *ngFor="let task of testingTasks" [ngClass]="taskStatus(task)" (click)="openModal(task)">
+              <p>
+                <strong>{{ task.name }}</strong>
+              </p>
+              <p>Task: {{ task.id }}</p>
               <p>{{ task.author }}</p>
-              <button (click)="moveToDone(task)">Completed</button>
+              <div class="button-area">
+                <button (click)="moveToDone(task)">Completed</button>
+                <button (click)="deleteTask(task)">Delete</button>
+              </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="done-tasks">
-        <div>
+      <div class="done-tasks task-list-container task-list-container-scroll">
+        <div class="header">
           <h3>Done</h3>
         </div>
         <div>
           <ul>
-            <li class="done-bg" *ngFor="let task of doneTasks" draggable="true">
-              <p><strong>{{ task.name }}</strong></p> 
+            <li *ngFor="let task of doneTasks" [ngClass]="taskStatus(task)" (click)="openModal(task)">
+              <p>
+                <strong>{{ task.name }}</strong>
+              </p>
+              <p>Task: {{ task.id }}</p>
               <p>{{ task.author }}</p>
+              <div class="button-area">
+                <button (click)="deleteTask(task)">Delete</button>
+              </div>
             </li>
           </ul>
         </div>
+      </div>
+    </div>
+    <!-- Todo Modal -->
+    <div class="modal" [ngClass]="{'show': showModal}">
+      <div *ngIf="selectedTask" class="modal-content">
+        <div class="modal-close">
+          <button (click)="closeModal()">Close</button>
+        </div>
+        <h2>{{ selectedTask.name }}</h2>
+        <p>Task ID: {{ selectedTask.id }}</p>
+        <p>Author: {{ selectedTask.author }}</p>
+        <p>Status: {{ selectedTask.status }}</p>
       </div>
     </div>
   </div>
