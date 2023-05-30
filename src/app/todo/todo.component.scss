@@ -61,6 +61,9 @@ $scrollStopThird: #cdcdcd;
         }
       }
     }
+    .total-tasks {
+      padding-bottom: 2rem;
+    }
     .todo-containers {
       display: flex;
       gap: 20px;
@@ -124,7 +127,7 @@ $scrollStopThird: #cdcdcd;
               font-size: 17px;
             }
             .task-author {
-                font-size: 15px;
+              font-size: 15px;
             }
             .button-area {
               display: flex;
@@ -177,8 +180,8 @@ $scrollStopThird: #cdcdcd;
       transition: opacity 0.3s ease;
     }
     .modal-content {
-      width: 50%;
-      height: 50%;
+      width: 50vw;
+      height: 50vh;
       background-color: $white;
       padding: 20px;
       border-radius: 5px;
@@ -203,6 +206,30 @@ $scrollStopThird: #cdcdcd;
           img {
             width: 15px;
           }
+        }
+      }
+      .modal-inputs {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          input {
+            height: 50px;
+            font-size: 17px;
+            padding: 0 10px;
+          }
+          select {
+            height: 50px;
+            font-size: 17px;
+            padding: 0 10px;
+          }
+        }
+        button {
+          width: 70px;
+          height: 50px;
         }
       }
     }

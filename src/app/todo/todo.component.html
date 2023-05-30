@@ -6,7 +6,7 @@
       <h6>Powered by Ferhat Mete</h6>
     </div>
     <!-- Inputs -->
-    <form (ngSubmit)="addTask()">
+    <form (ngSubmit)="addTask()" #taskForm="ngForm">
       <div class="todo-inputs">
         <div class="todo-inputs-first">
           <div>
@@ -17,6 +17,18 @@
               id="taskName"
               placeholder="Enter Task Name"
               required
+              #taskNameInput="ngModel"
+            />
+          </div>
+          <div>
+            <label for="taskName">Task Detail</label>
+            <input
+              [(ngModel)]="taskDetail"
+              name="taskDetail"
+              id="taskDetail"
+              placeholder="Enter Task Detail"
+              required
+              #taskDetailInput="ngModel"
             />
           </div>
           <div>
@@ -27,6 +39,7 @@
               id="author"
               aria-placeholder="Author"
               required
+              #authorNameInput="ngModel"
             >
               <option value="Ferhat Mete">Ferhat Mete</option>
               <option value="Tolga Işık">Tolga Işık</option>
@@ -41,6 +54,7 @@
               id="priority"
               aria-placeholder="Priority"
               required
+              #authorPriorityInput="ngModel"
             >
               <option value="highest">Highest</option>
               <option value="high">High</option>
@@ -54,10 +68,13 @@
     </form>
 
     <!-- Todo Containers -->
+    <div class="total-tasks">
+      <h3>Total Tasks: {{ countTasks() }}</h3>
+    </div>
     <div class="todo-containers">
       <div class="todo-tasks task-list-container task-list-container-scroll">
         <div class="header">
-          <h3>Todo</h3>
+          <h3>Todo {{ tasks.length }}</h3>
         </div>
         <div>
           <ul>
@@ -69,6 +86,7 @@
               <p class="task-name">
                 <strong>{{ task.name }}</strong>
               </p>
+              <p>Task: {{ task.id }}</p>
               <p class="task-author">{{ task.author }}</p>
               <div class="button-area">
                 <button (click)="moveToOngoing(task)">Completed</button>
@@ -80,7 +98,7 @@
       </div>
       <div class="ongoing-tasks task-list-container task-list-container-scroll">
         <div class="header">
-          <h3>Ongoning</h3>
+          <h3>Ongoing {{ ongoingTasks.length }}</h3>
         </div>
         <div>
           <ul>
@@ -104,7 +122,7 @@
       </div>
       <div class="testing-tasks task-list-container task-list-container-scroll">
         <div class="header">
-          <h3>Testing</h3>
+          <h3>Testing {{ testingTasks.length }}</h3>
         </div>
         <div>
           <ul>
@@ -128,7 +146,7 @@
       </div>
       <div class="done-tasks task-list-container task-list-container-scroll">
         <div class="header">
-          <h3>Done</h3>
+          <h3>Done {{ doneTasks.length }}</h3>
         </div>
         <div>
           <ul>
@@ -152,17 +170,72 @@
     </div>
     <!-- Todo Modal -->
     <div class="modal" [ngClass]="{ show: showModal }">
-      <div *ngIf="selectedTask" class="modal-content">
-        <div class="modal-close">
-          <button (click)="closeModal()">
-            <img src="assets/icons/close.svg" alt="Close" />
-          </button>
+      <form (ngSubmit)="updateTask()">
+        <div *ngIf="selectedTask" class="modal-content">
+          <div class="modal-close">
+            <button (click)="closeModal()">
+              <img src="assets/icons/close.svg" alt="Close" />
+            </button>
+          </div>
+          <!-- Update task -->
+          <div class="modal-inputs">
+            <div>
+              <label for="taskName">Task Name</label>
+              <input
+                [(ngModel)]="selectedTask.name"
+                name="taskName"
+                id="taskName"
+                placeholder="Enter Task Name"
+                required
+                #taskNameInput="ngModel"
+              />
+            </div>
+            <div>
+              <label for="author">Author</label>
+              <select
+                [(ngModel)]="selectedTask.author"
+                name="author"
+                id="author"
+                aria-placeholder="Author"
+                required
+                #authorNameInput="ngModel"
+              >
+                <option value="Ferhat Mete">Ferhat Mete</option>
+                <option value="Tolga Işık">Tolga Işık</option>
+                <option value="Umut Bektaş">Umut Bektaş</option>
+              </select>
+            </div>
+            <div>
+              <label for="taskName">Details</label>
+              <input
+                [(ngModel)]="selectedTask.taskDetail"
+                name="taskDetails"
+                id="taskDetails"
+                placeholder="Details"
+                required
+                #taskDetailsInput="ngModel"
+              />
+            </div>
+            <div>
+              <label for="priority">Priority</label>
+              <select
+                [(ngModel)]="selectedTask.priority"
+                name="priority"
+                id="priority"
+                aria-placeholder="Priority"
+                required
+                #authorPriorityInput="ngModel"
+              >
+                <option value="highest">Highest</option>
+                <option value="high">High</option>
+                <option value="low">Low</option>
+                <option value="lowest">Lowest</option>
+              </select>
+            </div>
+            <button type="submit">Save</button>
+          </div>
         </div>
-        <h2>{{ selectedTask.name }}</h2>
-        <p>Task: {{ selectedTask.id }}</p>
-        <p>Author: {{ selectedTask.author }}</p>
-        <p>Status: {{ selectedTask.status }}</p>
-      </div>
+      </form>
     </div>
   </div>
 </div>
